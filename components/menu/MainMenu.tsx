@@ -338,58 +338,6 @@ export function MainMenu() {
               </motion.article>
             ))}
           </div>
-
-          <div className="mt-20">
-            <p className="font-mono text-[9px] uppercase tracking-[0.4em] text-white/30">
-              HORROR SYSTEM
-            </p>
-
-            <h3 className="mt-4 font-mono text-xl uppercase tracking-[0.15em] text-white/80 sm:text-2xl">
-              The Night Gets Worse
-            </h3>
-
-            <div className="mt-8 space-y-2">
-              {horrorLevels.map((level, index) => (
-                <motion.div
-                  key={level.level}
-                  initial={
-                    shouldReduceMotion
-                      ? false
-                      : {
-                          opacity: 0,
-                          x: -15,
-                        }
-                  }
-                  whileInView={{
-                    opacity: 1,
-                    x: 0,
-                  }}
-                  viewport={{
-                    once: true,
-                    amount: 0.15,
-                  }}
-                  transition={{
-                    duration: 0.5,
-                    delay: index * 0.06,
-                    ease: "easeOut",
-                  }}
-                  className="grid grid-cols-[42px_1fr] gap-4 border border-white/10 bg-black/20 p-4 sm:grid-cols-[60px_180px_1fr] sm:items-center"
-                >
-                  <span className="font-mono text-[9px] tracking-[0.2em] text-white/20">
-                    {level.level}
-                  </span>
-
-                  <span className="font-mono text-xs uppercase tracking-[0.18em] text-white/70">
-                    {level.title}
-                  </span>
-
-                  <span className="col-start-2 font-mono text-[10px] leading-5 text-white/30 sm:col-start-auto">
-                    {level.description}
-                  </span>
-                </motion.div>
-              ))}
-            </div>
-          </div>
         </div>
       </section>
 
