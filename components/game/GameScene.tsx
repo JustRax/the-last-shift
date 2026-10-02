@@ -5,6 +5,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useRouter } from "next/navigation";
 
 import { useGameStore } from "@/store/gameStore";
+import { useShallow } from "zustand/react/shallow";
 import type { ChoiceDefinition, GameStage, InvestigationId } from "@/types/game";
 import { canInvestigate } from "@/engine/prologueEngine";
 import { officeInvestigations, phoneChoices, wakeUpDialogue } from "@/data/scenarios/prologue";
@@ -39,10 +40,12 @@ export function GameScene() {
   const [phoneReady, setPhoneReady] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
 
-  const investigated = useGameStore((state) =>
-    officeInvestigations
-      .map((item) => item.id)
-      .filter((id) => state.flags[`investigated:${id}`]),
+  const investigated = useGameStore(
+    useShallow((state) =>
+      officeInvestigations
+        .map((item) => item.id)
+        .filter((id) => state.flags[`investigated:${id}`]),
+    ),
   );
 
   const currentLine = wakeUpDialogue[dialogueIndex];
