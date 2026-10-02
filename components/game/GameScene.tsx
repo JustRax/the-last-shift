@@ -430,7 +430,7 @@ export function GameScene() {
                 The call has already been resolved. You can continue to inspect the phone,
                 but the decision cannot be repeated.
               </p>
-            )
+            )}
           </EvidenceModal>
         )}
       </AnimatePresence>
