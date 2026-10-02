@@ -25,6 +25,7 @@ export function GameScene() {
     currentChapter,
     currentScenarioId,
     setScenario,
+    setChapter,
     markInvestigated,
     applyEffects,
     setFlag,
@@ -58,6 +59,7 @@ export function GameScene() {
   }
 
   function startInvestigation() {
+    setChapter(1);
     setStage("investigation");
     setScenario("chapter-01-welcome-back");
   }
