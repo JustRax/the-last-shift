@@ -23,6 +23,7 @@ export interface GameState {
   playthroughCount: number;
   horrorLevel: number;
   hasSave: boolean;
+  lastVisitedPath: string;
   theme: Theme;
 
   startNewGame: () => void;
@@ -34,6 +35,7 @@ export interface GameState {
   applyEffects: (effects: Partial<GameStats>) => void;
   addClue: (clueId: string) => void;
   recordChoice: (choiceId: string) => void;
+  setLastVisitedPath: (path: string) => void;
 }
 
 const initialStats: GameStats = {
@@ -60,6 +62,7 @@ export const useGameStore = create<GameState>()(
       playthroughCount: 0,
       horrorLevel: 0,
       hasSave: false,
+      lastVisitedPath: "/",
       theme: "dark",
 
       startNewGame: () =>
@@ -80,6 +83,11 @@ export const useGameStore = create<GameState>()(
         })),
 
       setTheme: (theme) => set({ theme }),
+
+      setLastVisitedPath: (path) =>
+        set({
+          lastVisitedPath: path,
+        }),
 
       setScenario: (scenarioId) =>
         set({
