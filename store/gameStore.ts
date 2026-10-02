@@ -57,6 +57,8 @@ export const useGameStore = create<GameState>()(
     (set) => ({
       currentScenarioId: "chapter-00-wake-up",
       currentChapter: 0,
+      currentStage: "wake-up",
+      dialogueIndex: 0,
       stats: { ...initialStats },
       flags: {},
       clues: [],
@@ -86,6 +88,7 @@ export const useGameStore = create<GameState>()(
           playthroughCount: state.playthroughCount + 1,
           horrorLevel: 0,
           hasSave: true,
+          lastVisitedPath: "/game",
           theme: state.theme,
         })),
 
