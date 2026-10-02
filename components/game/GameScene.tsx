@@ -76,7 +76,11 @@ export function GameScene() {
   function handleInvestigation(id: InvestigationId) {
     if (!canInvestigate("investigation", investigated, id)) return;
 
-    markInvestigated(id);
+    const alreadyInvestigated = investigated.includes(id);
+
+    if (!alreadyInvestigated) {
+      markInvestigated(id);
+    }
 
     if (id === "computer") {
       setShowTerminal(true);
@@ -409,17 +413,24 @@ export function GameScene() {
               Before you can put it down, the phone rings once.
             </p>
             <p className="mt-4">Then it rings again.</p>
-            <div className="mt-6">
-              <MenuButton
-                onClick={() => {
-                  setModal(null);
-                  setPhoneReady(false);
-                  setStage("phone-choice");
-                }}
-              >
-                Answer the situation
-              </MenuButton>
-            </div>
+            {!flags.answeredPhone && !flags.phoneIgnored ? (
+              <div className="mt-6">
+                <MenuButton
+                  onClick={() => {
+                    setModal(null);
+                    setPhoneReady(false);
+                    setStage("phone-choice");
+                  }}
+                >
+                  Answer the situation
+                </MenuButton>
+              </div>
+            ) : (
+              <p className="mt-6 border-l border-[var(--ui-border-strong)] pl-4 font-mono text-[10px] leading-6 text-[var(--ui-text-subtle)]">
+                The call has already been resolved. You can continue to inspect the phone,
+                but the decision cannot be repeated.
+              </p>
+            )
           </EvidenceModal>
         )}
       </AnimatePresence>
