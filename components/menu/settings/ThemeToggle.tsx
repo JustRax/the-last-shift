@@ -7,18 +7,9 @@ const themes: Array<{
   value: Theme;
   label: string;
 }> = [
-  {
-    value: "dark",
-    label: "Dark",
-  },
-  {
-    value: "light",
-    label: "Light",
-  },
-  {
-    value: "system",
-    label: "System",
-  },
+  { value: "dark", label: "Dark" },
+  { value: "light", label: "Light" },
+  { value: "system", label: "System" },
 ];
 
 export function ThemeToggle() {
@@ -27,11 +18,11 @@ export function ThemeToggle() {
 
   return (
     <div>
-      <p className="font-mono text-[9px] uppercase tracking-[0.3em] text-white/30">
+      <p className="font-mono text-[9px] uppercase tracking-[0.3em] text-[var(--ui-text-subtle)]">
         Appearance
       </p>
 
-      <p className="mt-2 font-mono text-[10px] leading-5 text-white/20">
+      <p className="mt-2 font-mono text-[10px] leading-5 text-[var(--ui-text-muted)]">
         Choose how the interface should appear.
       </p>
 
@@ -53,13 +44,27 @@ export function ThemeToggle() {
                 "min-h-12",
                 "border",
                 "px-3 py-3",
-                "font-mono text-[10px] uppercase tracking-[0.2em]",
+                "font-mono text-[10px]",
+                "uppercase tracking-[0.2em]",
                 "transition-all duration-200",
                 "focus:outline-none",
-                "focus-visible:ring-2 focus-visible:ring-white/50",
+                "focus-visible:ring-2",
+                "focus-visible:ring-[var(--ui-border-strong)]",
+
                 active
-                  ? "border-white/40 bg-white/[0.08] text-white"
-                  : "border-white/10 bg-black/30 text-white/40 hover:border-white/25 hover:text-white/70",
+                  ? [
+                      "border-[var(--ui-border-strong)]",
+                      "bg-[var(--ui-accent-soft)]",
+                      "text-[var(--ui-text)]",
+                    ].join(" ")
+                  : [
+                      "border-[var(--ui-border)]",
+                      "bg-[var(--ui-panel)]",
+                      "text-[var(--ui-text-muted)]",
+                      "hover:border-[var(--ui-border-strong)]",
+                      "hover:bg-[var(--ui-panel-hover)]",
+                      "hover:text-[var(--ui-text)]",
+                    ].join(" "),
               ].join(" ")}
             >
               {option.label}
@@ -68,7 +73,7 @@ export function ThemeToggle() {
         })}
       </div>
 
-      <p className="mt-4 font-mono text-[9px] uppercase tracking-[0.25em] text-white/20">
+      <p className="mt-4 font-mono text-[9px] uppercase tracking-[0.25em] text-[var(--ui-text-subtle)]">
         Current: {theme}
       </p>
     </div>

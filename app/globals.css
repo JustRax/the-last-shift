@@ -1,473 +1,406 @@
-/* @tailwind base;
-@tailwind components;
-@tailwind utilities; */
 @import "tailwindcss";
 
+/* =========================================================
+   THE LAST SHIFT
+   Global Theme + CRT Foundation
+   ========================================================= */
 
 :root {
-  background: #050505;
-  color: white;
+  /* -------------------------------------------------------
+     DARK THEME — DEFAULT
+     ------------------------------------------------------- */
+
+  --ui-bg: #050505;
+  --ui-surface: #0a0a0a;
+
+  --ui-panel: #101010;
+  --ui-panel-hover: #161616;
+
+  --ui-text: #eeeeee;
+  --ui-text-muted: #9a9a9a;
+  --ui-text-subtle: #666666;
+  --ui-text-faint: #444444;
+
+  --ui-border: #2a2a2a;
+  --ui-border-strong: #454545;
+
+  --ui-accent: #d6d6d6;
+  --ui-accent-soft: rgba(255, 255, 255, 0.08);
+
+  --ui-danger: #c65f5f;
+
+  /* -------------------------------------------------------
+     CRT
+     ------------------------------------------------------- */
+
+  --crt-line: rgba(255, 255, 255, 0.035);
+  --crt-glow: rgba(255, 255, 255, 0.025);
+  --crt-noise: rgba(255, 255, 255, 0.018);
+
+  /* -------------------------------------------------------
+     BACKGROUND
+     ------------------------------------------------------- */
+
+  --office-bg: #090909;
+  --office-overlay: rgba(0, 0, 0, 0.45);
+
+  /* -------------------------------------------------------
+     SELECTION
+     ------------------------------------------------------- */
+
+  --selection-bg: rgba(255, 255, 255, 0.15);
+  --selection-text: #ffffff;
+
   color-scheme: dark;
+  background: var(--ui-bg);
+  color: var(--ui-text);
 }
 
-html,
+/* =========================================================
+   LIGHT THEME
+   Cold corporate terminal / daylight CRT
+   ========================================================= */
+
+:root[data-theme="light"] {
+  --ui-bg: #d8d8d5;
+  --ui-surface: #dededb;
+
+  --ui-panel: #cfcfcb;
+  --ui-panel-hover: #c5c5c1;
+
+  --ui-text: #171717;
+  --ui-text-muted: #4d4d4b;
+  --ui-text-subtle: #6d6d69;
+  --ui-text-faint: #8b8b86;
+
+  --ui-border: #999994;
+  --ui-border-strong: #777772;
+
+  --ui-accent: #242424;
+  --ui-accent-soft: rgba(0, 0, 0, 0.06);
+
+  --ui-danger: #9f3939;
+
+  /* CRT becomes subtler in daylight */
+  --crt-line: rgba(0, 0, 0, 0.035);
+  --crt-glow: rgba(0, 0, 0, 0.018);
+  --crt-noise: rgba(0, 0, 0, 0.012);
+
+  --office-bg: #c8c8c5;
+  --office-overlay: rgba(255, 255, 255, 0.22);
+
+  --selection-bg: rgba(0, 0, 0, 0.12);
+  --selection-text: #111111;
+
+  color-scheme: light;
+  background: var(--ui-bg);
+  color: var(--ui-text);
+}
+
+/* =========================================================
+   SYSTEM THEME
+   ========================================================= */
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]):not([data-theme="light"]) {
+    --ui-bg: #d8d8d5;
+    --ui-surface: #dededb;
+
+    --ui-panel: #cfcfcb;
+    --ui-panel-hover: #c5c5c1;
+
+    --ui-text: #171717;
+    --ui-text-muted: #4d4d4b;
+    --ui-text-subtle: #6d6d69;
+    --ui-text-faint: #8b8b86;
+
+    --ui-border: #999994;
+    --ui-border-strong: #777772;
+
+    --ui-accent: #242424;
+    --ui-accent-soft: rgba(0, 0, 0, 0.06);
+
+    --ui-danger: #9f3939;
+
+    --crt-line: rgba(0, 0, 0, 0.035);
+    --crt-glow: rgba(0, 0, 0, 0.018);
+    --crt-noise: rgba(0, 0, 0, 0.012);
+
+    --office-bg: #c8c8c5;
+    --office-overlay: rgba(255, 255, 255, 0.22);
+
+    --selection-bg: rgba(0, 0, 0, 0.12);
+    --selection-text: #111111;
+
+    color-scheme: light;
+  }
+}
+
+/* =========================================================
+   DOCUMENT
+   ========================================================= */
+
+html {
+  min-height: 100%;
+  background: var(--ui-bg);
+  color: var(--ui-text);
+  scroll-behavior: smooth;
+}
+
 body {
   min-height: 100%;
   margin: 0;
-  background: #050505;
-}
-
-body {
   overflow-x: hidden;
+  background: var(--ui-bg);
+  color: var(--ui-text);
+
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    "Courier New",
+    monospace;
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
 }
 
-:root[data-theme="dark"] {
-  background: #050505;
-  color: white;
-  color-scheme: dark;
+/* =========================================================
+   SELECTION
+   ========================================================= */
+
+::selection {
+  background: var(--selection-bg);
+  color: var(--selection-text);
 }
 
-:root[data-theme="light"] {
-  background: #e8e8e8;
-  color: #111111;
-  color-scheme: light;
-}
+/* =========================================================
+   LANDING PAGE
+   ========================================================= */
 
-/* =========================================
-   MAIN MENU
-   ========================================= */
-
-.main-menu {
+.landing-page {
   position: relative;
   min-height: 100svh;
   overflow: hidden;
-  background: #050505;
+  background: var(--ui-bg);
+  color: var(--ui-text);
 }
 
-/* Temporary CSS background.
-   Replace this later with your pixel-art office asset. */
+/* =========================================================
+   SECTIONS
+   ========================================================= */
+
+.landing-section {
+  position: relative;
+  min-height: 100svh;
+  isolation: isolate;
+}
+
+.landing-content {
+  position: relative;
+  background: var(--ui-bg);
+}
+
+.landing-footer {
+  position: relative;
+  background: var(--ui-surface);
+  color: var(--ui-text);
+}
+
+/* =========================================================
+   OFFICE BACKGROUND
+   ========================================================= */
+
 .office-background {
-  position: absolute;
+  position: fixed;
   inset: 0;
+  z-index: -10;
+  pointer-events: none;
 
   background:
-    linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.25),
-      rgba(0, 0, 0, 0.9)
-    ),
     radial-gradient(
-      ellipse at 50% 35%,
-      rgba(255, 255, 255, 0.07),
+      circle at 50% 35%,
+      rgba(255, 255, 255, 0.025),
       transparent 45%
     ),
-    #080808;
+    linear-gradient(
+      180deg,
+      var(--office-bg),
+      var(--ui-bg)
+    );
 
-  transform: scale(1.03);
-
-  animation: background-breathe 12s ease-in-out infinite;
+  opacity: 0.95;
 }
 
-@keyframes background-breathe {
-  0%,
-  100% {
-    transform: scale(1.03);
-  }
-
-  50% {
-    transform: scale(1.05);
-  }
-}
-
-/* =========================================
-   VIGNETTE
-   ========================================= */
-
-.menu-vignette {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-
+:root[data-theme="light"] .office-background {
   background:
     radial-gradient(
-      ellipse at center,
-      transparent 25%,
-      rgba(0, 0, 0, 0.55) 75%,
-      rgba(0, 0, 0, 0.95) 100%
+      circle at 50% 35%,
+      rgba(255, 255, 255, 0.3),
+      transparent 45%
+    ),
+    linear-gradient(
+      180deg,
+      var(--office-bg),
+      var(--ui-bg)
     );
 }
 
-/* =========================================
-   CRT
-   ========================================= */
+/* =========================================================
+   MENU VIGNETTE
+   ========================================================= */
 
-.crt-overlay {
-  position: absolute;
+.menu-vignette {
+  position: fixed;
   inset: 0;
-  z-index: 20;
+  z-index: -5;
+  pointer-events: none;
 
   background:
     radial-gradient(
       ellipse at center,
-      transparent 50%,
-      rgba(0, 0, 0, 0.35)
+      transparent 35%,
+      var(--office-overlay) 100%
+    );
+}
+
+/* =========================================================
+   CRT OVERLAY
+   ========================================================= */
+
+.crt-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      transparent 45%,
+      var(--crt-glow) 100%
     );
 
   mix-blend-mode: multiply;
+  opacity: 0.7;
 }
 
+:root[data-theme="light"] .crt-overlay {
+  opacity: 0.35;
+}
+
+/* =========================================================
+   SCANLINES
+   ========================================================= */
+
 .scanlines {
-  position: absolute;
+  position: fixed;
   inset: 0;
-  z-index: 21;
+  z-index: 41;
+  pointer-events: none;
 
   background:
     repeating-linear-gradient(
       to bottom,
-      rgba(255, 255, 255, 0.018) 0px,
-      rgba(255, 255, 255, 0.018) 1px,
-      transparent 1px,
+      transparent 0,
+      transparent 2px,
+      var(--crt-line) 3px,
       transparent 4px
     );
 
-  opacity: 0.45;
+  opacity: 0.6;
 }
 
-/* =========================================
-   TITLE
-   ========================================= */
+:root[data-theme="light"] .scanlines {
+  opacity: 0.4;
+}
+
+/* =========================================================
+   MENU TITLE
+   ========================================================= */
 
 .menu-title {
-  text-shadow:
-    0 0 12px rgba(255, 255, 255, 0.12),
-    0 0 40px rgba(255, 255, 255, 0.04);
-
-  animation: title-flicker 8s infinite;
-}
-
-@keyframes title-flicker {
-  0%,
-  92%,
-  100% {
-    opacity: 1;
-  }
-
-  93% {
-    opacity: 0.72;
-  }
-
-  94% {
-    opacity: 1;
-  }
-
-  95% {
-    opacity: 0.88;
-  }
-}
-
-/* =========================================
-   TERMINAL
-   ========================================= */
-
-.terminal-shell {
-  filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.7));
-}
-
-.terminal-frame {
-  padding: 3px;
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255, 255, 255, 0.14),
-      rgba(255, 255, 255, 0.02)
-    );
-
-  border-radius: 3px;
-}
-
-.terminal-screen {
   position: relative;
-  min-height: 260px;
+  color: var(--ui-text);
 
-  background:
-    radial-gradient(
-      ellipse at center,
-      rgba(255, 255, 255, 0.045),
-      transparent 65%
-    ),
-    #080808;
-
-  box-shadow:
-    inset 0 0 60px rgba(0, 0, 0, 0.8),
-    inset 0 0 10px rgba(255, 255, 255, 0.03);
+  text-shadow:
+    0 0 12px var(--crt-glow);
 }
 
-.terminal-noise {
-  position: absolute;
-  inset: 0;
-
-  opacity: 0.04;
-
-  background-image:
-    url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
-
-  animation: terminal-noise 0.15s steps(2) infinite;
+:root[data-theme="light"] .menu-title {
+  text-shadow:
+    0 0 8px rgba(0, 0, 0, 0.08);
 }
 
-@keyframes terminal-noise {
-  0% {
-    transform: translate(0, 0);
-  }
+/* =========================================================
+   TERMINAL SUPPORT
+   ========================================================= */
 
-  25% {
-    transform: translate(-1%, 1%);
-  }
-
-  50% {
-    transform: translate(1%, -1%);
-  }
-
-  75% {
-    transform: translate(1%, 1%);
-  }
-
-  100% {
-    transform: translate(0, 0);
-  }
+.terminal {
+  color: var(--ui-text);
+  border-color: var(--ui-border);
+  background: var(--ui-panel);
 }
 
-.terminal-text {
-  animation: terminal-text-in 0.5s ease-out;
+/* =========================================================
+   DANGER BUTTON
+   ========================================================= */
+
+.menu-button-danger {
+  border-color: color-mix(
+    in srgb,
+    var(--ui-danger) 55%,
+    var(--ui-border)
+  );
+
+  color: var(--ui-danger);
 }
 
-@keyframes terminal-text-in {
-  from {
-    opacity: 0;
-    transform: translateY(3px);
-  }
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
 
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+* {
+  scrollbar-width: thin;
+  scrollbar-color:
+    var(--ui-border-strong)
+    var(--ui-bg);
 }
 
-.terminal-light {
-  animation: terminal-light 4s ease-in-out infinite;
+*::-webkit-scrollbar {
+  width: 8px;
 }
 
-@keyframes terminal-light {
-  0%,
-  100% {
-    opacity: 0.35;
-  }
-
-  50% {
-    opacity: 0.8;
-  }
+*::-webkit-scrollbar-track {
+  background: var(--ui-bg);
 }
 
-/* =========================================
-   ACCESSIBILITY
-   ========================================= */
+*::-webkit-scrollbar-thumb {
+  background: var(--ui-border-strong);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--ui-text-subtle);
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-}
-
-/* =========================================
-   LIGHT THEME
-   ========================================= */
-
-:root[data-theme="light"] body {
-  background: #e8e8e8;
-  color: #111111;
-}
-
-:root[data-theme="light"] .main-menu {
-  background: #e8e8e8;
-  color: #111111;
-}
-
-/* =========================================
-   OFFICE BACKGROUND
-   ========================================= */
-
-:root[data-theme="light"] .office-background {
-  background:
-    linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0.2),
-      rgba(220, 220, 220, 0.8)
-    ),
-    radial-gradient(
-      ellipse at 50% 35%,
-      rgba(0, 0, 0, 0.05),
-      transparent 45%
-    ),
-    #e8e8e8;
-}
-
-/* =========================================
-   VIGNETTE
-   ========================================= */
-
-:root[data-theme="light"] .menu-vignette {
-  background:
-    radial-gradient(
-      ellipse at center,
-      transparent 35%,
-      rgba(0, 0, 0, 0.08) 80%,
-      rgba(0, 0, 0, 0.18) 100%
-    );
-}
-
-/* =========================================
-   CRT
-   ========================================= */
-
-:root[data-theme="light"] .crt-overlay {
-  background:
-    radial-gradient(
-      ellipse at center,
-      transparent 55%,
-      rgba(0, 0, 0, 0.08)
-    );
-}
-
-:root[data-theme="light"] .scanlines {
-  background:
-    repeating-linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.025) 0px,
-      rgba(0, 0, 0, 0.025) 1px,
-      transparent 1px,
-      transparent 4px
-    );
-
-  opacity: 0.35;
-}
-
-/* =========================================
-   TEXT
-   ========================================= */
-
-:root[data-theme="light"] .main-menu .text-white {
-  color: #111111;
-}
-
-:root[data-theme="light"] .main-menu .text-white\/70 {
-  color: rgb(17 17 17 / 0.7);
-}
-
-:root[data-theme="light"] .main-menu .text-white\/60 {
-  color: rgb(17 17 17 / 0.6);
-}
-
-:root[data-theme="light"] .main-menu .text-white\/50 {
-  color: rgb(17 17 17 / 0.5);
-}
-
-:root[data-theme="light"] .main-menu .text-white\/40 {
-  color: rgb(17 17 17 / 0.4);
-}
-
-:root[data-theme="light"] .main-menu .text-white\/30 {
-  color: rgb(17 17 17 / 0.3);
-}
-
-:root[data-theme="light"] .main-menu .text-white\/20 {
-  color: rgb(17 17 17 / 0.2);
-}
-
-:root[data-theme="light"] .main-menu .text-white\/10 {
-  color: rgb(17 17 17 / 0.1);
-}
-
-/* =========================================
-   BORDERS
-   ========================================= */
-
-:root[data-theme="light"] .main-menu .border-white\/10 {
-  border-color: rgb(17 17 17 / 0.15);
-}
-
-:root[data-theme="light"] .main-menu .border-white\/20 {
-  border-color: rgb(17 17 17 / 0.2);
-}
-
-:root[data-theme="light"] .main-menu .border-white\/30 {
-  border-color: rgb(17 17 17 / 0.3);
-}
-
-:root[data-theme="light"] .main-menu .border-white\/40 {
-  border-color: rgb(17 17 17 / 0.4);
-}
-
-/* =========================================
-   BLACK BACKGROUNDS
-   ========================================= */
-
-:root[data-theme="light"] .main-menu .bg-black\/30 {
-  background-color: rgb(255 255 255 / 0.45);
-}
-
-:root[data-theme="light"] .main-menu .bg-black\/40 {
-  background-color: rgb(255 255 255 / 0.55);
-}
-
-:root[data-theme="light"] .main-menu .bg-black\/80 {
-  background-color: rgb(255 255 255 / 0.8);
-}
-
-:root[data-theme="light"] .main-menu .bg-black\/90 {
-  background-color: rgb(255 255 255 / 0.92);
-}
-
-/* =========================================
-   TERMINAL
-   ========================================= */
-
-:root[data-theme="light"] .terminal-frame {
-  background:
-    linear-gradient(
-      145deg,
-      rgba(0, 0, 0, 0.15),
-      rgba(0, 0, 0, 0.03)
-    );
-}
-
-:root[data-theme="light"] .terminal-screen {
-  background:
-    radial-gradient(
-      ellipse at center,
-      rgba(0, 0, 0, 0.035),
-      transparent 65%
-    ),
-    #f4f4f4;
-
-  box-shadow:
-    inset 0 0 60px rgba(0, 0, 0, 0.08),
-    inset 0 0 10px rgba(0, 0, 0, 0.04);
-}
-
-:root[data-theme="light"] .terminal-light {
-  background: #111111;
-}
-
-/* =========================================
-   TITLE
-   ========================================= */
-
-:root[data-theme="light"] .menu-title {
-  text-shadow:
-    0 0 12px rgba(0, 0, 0, 0.08),
-    0 0 40px rgba(0, 0, 0, 0.03);
 }

@@ -1,8 +1,12 @@
 "use client";
 
-import type { ButtonHTMLAttributes, ReactNode } from "react";
+import type {
+  ButtonHTMLAttributes,
+  ReactNode,
+} from "react";
 
-interface MenuButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface MenuButtonProps
+  extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   danger?: boolean;
 }
@@ -18,28 +22,35 @@ export function MenuButton({
       type="button"
       className={[
         "group relative w-full overflow-hidden",
-        "border border-white/10",
-        "bg-black/40",
+        "border",
         "px-6 py-4",
         "text-left",
         "font-mono text-sm uppercase tracking-[0.28em]",
-        "text-white/70",
         "transition-all duration-200",
-        "hover:border-white/30",
-        "hover:bg-white/[0.06]",
-        "hover:text-white",
         "focus:outline-none",
-        "focus-visible:ring-2 focus-visible:ring-white/50",
+        "focus-visible:ring-2",
+        "focus-visible:ring-[var(--ui-border-strong)]",
         "active:scale-[0.99]",
+
+        "border-[var(--ui-border)]",
+        "bg-[var(--ui-panel)]",
+        "text-[var(--ui-text-muted)]",
+
+        "hover:border-[var(--ui-border-strong)]",
+        "hover:bg-[var(--ui-panel-hover)]",
+        "hover:text-[var(--ui-text)]",
+
         danger ? "menu-button-danger" : "",
+
         className,
       ].join(" ")}
       {...props}
     >
       <span
+        aria-hidden="true"
         className="
           absolute inset-y-0 left-0 w-0
-          bg-white/[0.04]
+          bg-[var(--ui-accent-soft)]
           transition-all duration-200
           group-hover:w-full
         "
@@ -47,16 +58,17 @@ export function MenuButton({
 
       <span className="relative flex items-center gap-3">
         <span
+          aria-hidden="true"
           className="
-            text-white/20
+            text-[var(--ui-text-faint)]
             transition-colors
-            group-hover:text-white/70
+            group-hover:text-[var(--ui-text-muted)]
           "
         >
           &gt;
         </span>
 
-        {children}
+        <span>{children}</span>
       </span>
     </button>
   );
