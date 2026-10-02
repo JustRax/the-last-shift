@@ -24,7 +24,11 @@ export function GameScene() {
     flags,
     currentChapter,
     currentScenarioId,
+    currentStage,
+    dialogueIndex: savedDialogueIndex,
     setScenario,
+    setStage: saveStage,
+    setDialogueIndex: saveDialogueIndex,
     setChapter,
     markInvestigated,
     applyEffects,
@@ -32,8 +36,21 @@ export function GameScene() {
     hasSave,
   } = useGameStore();
 
-  const [stage, setStage] = useState<GameStage>("wake-up");
-  const [dialogueIndex, setDialogueIndex] = useState(0);
+  const [stage, setLocalStage] = useState<GameStage>(currentStage);
+  const [dialogueIndex, setLocalDialogueIndex] = useState(savedDialogueIndex);
+
+  function setStage(nextStage: GameStage) {
+    setLocalStage(nextStage);
+    saveStage(nextStage);
+  }
+
+  function setDialogueIndex(nextIndex: number | ((index: number) => number)) {
+    setLocalDialogueIndex((current) => {
+      const next = typeof nextIndex === "function" ? nextIndex(current) : nextIndex;
+      saveDialogueIndex(next);
+      return next;
+    });
+  }
   const [modal, setModal] = useState<InvestigationId | null>(null);
   const [showTerminal, setShowTerminal] = useState(false);
   const [phoneReady, setPhoneReady] = useState(false);
