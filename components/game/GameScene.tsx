@@ -144,7 +144,7 @@ export function GameScene() {
   return (
     <main className="relative min-h-[100svh] overflow-hidden bg-[var(--ui-bg)] text-[var(--ui-text)]">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,var(--ui-accent-soft),transparent_42%),linear-gradient(180deg,var(--ui-surface),var(--ui-bg))]" />
-      <div className="pointer-events-none absolute inset-0 opacity-40 [background:repeating-linear-gradient(to_bottom,transparent_0,transparent_2px,rgba(255,255,255,0.035)_3px,transparent_4px)]" />
+      <div className="pointer-events-none absolute inset-0 opacity-40 [background:repeating-linear-gradient(to_bottom,transparent_0,transparent_2px,var(--crt-line)_3px,transparent_4px)]" />
 
       <div className="relative z-10 mx-auto flex min-h-[100svh] w-full max-w-7xl flex-col px-4 py-4 sm:px-6 lg:px-8">
         <header className="flex items-center justify-between gap-4">
