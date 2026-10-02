@@ -143,7 +143,7 @@ export function GameScene() {
 
   return (
     <main className="relative min-h-[100svh] overflow-hidden bg-[var(--ui-bg)] text-[var(--ui-text)]">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(255,255,255,0.035),transparent_42%),linear-gradient(180deg,#151515,#070707)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,var(--ui-accent-soft),transparent_42%),linear-gradient(180deg,var(--ui-surface),var(--ui-bg))]" />
       <div className="pointer-events-none absolute inset-0 opacity-40 [background:repeating-linear-gradient(to_bottom,transparent_0,transparent_2px,rgba(255,255,255,0.035)_3px,transparent_4px)]" />
 
       <div className="relative z-10 mx-auto flex min-h-[100svh] w-full max-w-7xl flex-col px-4 py-4 sm:px-6 lg:px-8">
@@ -192,18 +192,18 @@ export function GameScene() {
                   animate={{ opacity: 1 }}
                   className="grid min-h-[60vh] gap-5 lg:grid-cols-[1fr_320px]"
                 >
-                  <div className="relative min-h-[440px] overflow-hidden border border-[var(--ui-border)] bg-[#161616]">
+                  <div className="relative min-h-[440px] overflow-hidden border border-[var(--ui-border)] bg-[var(--ui-surface)]">
                     <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),transparent_35%),linear-gradient(90deg,rgba(255,255,255,0.025),transparent_50%)]" />
-                    <div className="absolute left-[8%] top-[14%] h-[18%] w-[84%] border border-[var(--ui-border)] bg-[#0f0f0f]" />
-                    <div className="absolute left-[15%] top-[32%] h-[8%] w-[70%] bg-[#111111]" />
+                    <div className="absolute left-[8%] top-[14%] h-[18%] w-[84%] border border-[var(--ui-border)] bg-[var(--ui-panel)]" />
+                    <div className="absolute left-[15%] top-[32%] h-[8%] w-[70%] bg-[var(--ui-panel-hover)]" />
                     <button
                       type="button"
                       aria-label="Inspect the computer"
                       onClick={() => startInvestigation()}
                       className="absolute left-[34%] top-[24%] h-[23%] w-[30%] border border-transparent bg-transparent hover:border-[var(--ui-border-strong)] focus:outline-none focus-visible:border-[var(--ui-border-strong)]"
                     />
-                    <div className="absolute bottom-[13%] left-[8%] h-[25%] w-[84%] border border-[var(--ui-border)] bg-[#121212]" />
-                    <div className="absolute bottom-[18%] left-[20%] h-[13%] w-[18%] border border-[var(--ui-border)] bg-[#0a0a0a]" />
+                    <div className="absolute bottom-[13%] left-[8%] h-[25%] w-[84%] border border-[var(--ui-border)] bg-[var(--ui-panel)]" />
+                    <div className="absolute bottom-[18%] left-[20%] h-[13%] w-[18%] border border-[var(--ui-border)] bg-[var(--ui-bg)]" />
                     <div className="absolute bottom-[20%] right-[20%] h-[8%] w-[12%] border border-[var(--ui-border)] bg-[#0a0a0a]" />
                     <div className="absolute right-[8%] top-[12%] h-3 w-3 rounded-full bg-[var(--ui-text-faint)]" />
                     <div className="absolute bottom-4 left-4 font-mono text-[8px] uppercase tracking-[0.25em] text-[var(--ui-text-faint)]">
@@ -258,8 +258,8 @@ export function GameScene() {
                   animate={{ opacity: 1, y: 0 }}
                   className="grid gap-5 lg:grid-cols-[1fr_340px]"
                 >
-                  <div className="relative min-h-[440px] overflow-hidden border border-[var(--ui-border)] bg-[#151515]">
-                    <div className="absolute inset-x-[8%] top-[12%] h-[24%] border border-[var(--ui-border)] bg-[#0c0c0c]" />
+                  <div className="relative min-h-[440px] overflow-hidden border border-[var(--ui-border)] bg-[var(--ui-surface)]">
+                    <div className="absolute inset-x-[8%] top-[12%] h-[24%] border border-[var(--ui-border)] bg-[var(--ui-panel)]" />
                     <button
                       type="button"
                       onClick={() => handleInvestigation("computer")}
@@ -357,13 +357,25 @@ export function GameScene() {
           </div>
         </div>
 
-        <footer className="flex items-center justify-between border-t border-[var(--ui-border)] pt-3">
-          <span className="font-mono text-[8px] uppercase tracking-[0.25em] text-[var(--ui-text-faint)]">
-            SCENARIO: {currentScenarioId}
-          </span>
-          <span className="font-mono text-[8px] uppercase tracking-[0.25em] text-[var(--ui-text-faint)]">
-            CHAPTER {currentChapter}
-          </span>
+        <footer className="flex flex-col gap-3 border-t border-[var(--ui-border)] pt-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+            <span className="font-mono text-[8px] uppercase tracking-[0.25em] text-[var(--ui-text-faint)]">
+              SCENARIO: {currentScenarioId}
+            </span>
+            <span className="font-mono text-[8px] uppercase tracking-[0.25em] text-[var(--ui-text-faint)]">
+              CHAPTER {currentChapter}
+            </span>
+          </div>
+          <MenuButton
+            className="sm:w-auto sm:px-5 sm:py-3 sm:text-[10px]"
+            onClick={() => {
+              // Zustand persist writes the current state to LocalStorage.
+              // Returning to the landing page lets the player Continue later.
+              router.push("/");
+            }}
+          >
+            Save &amp; Return to Menu
+          </MenuButton>
         </footer>
       </div>
 
