@@ -28,6 +28,7 @@ export interface GameState {
   startNewGame: () => void;
   setTheme: (theme: Theme) => void;
   setScenario: (scenarioId: string) => void;
+  setChapter: (chapter: number) => void;
   markInvestigated: (id: string) => void;
   setFlag: (key: string, value: boolean) => void;
   applyEffects: (effects: Partial<GameStats>) => void;
@@ -83,6 +84,12 @@ export const useGameStore = create<GameState>()(
       setScenario: (scenarioId) =>
         set({
           currentScenarioId: scenarioId,
+          hasSave: true,
+        }),
+
+      setChapter: (chapter) =>
+        set({
+          currentChapter: chapter,
           hasSave: true,
         }),
 
