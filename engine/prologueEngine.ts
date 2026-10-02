@@ -6,7 +6,6 @@ export function canInvestigate(
   id: InvestigationId,
 ) {
   if (stage !== "investigation") return false;
-  if (investigated.includes(id)) return false;
   if (id !== "computer" && !investigated.includes("computer")) return false;
   return true;
 }
