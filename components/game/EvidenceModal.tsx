@@ -1,12 +1,13 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { MenuButton } from "@/components/MenuButton";
 
 interface EvidenceModalProps {
   title: string;
   eyebrow: string;
-  children: React.ReactNode;
+  children: ReactNode;
   onClose: () => void;
 }
 
