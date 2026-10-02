@@ -41,6 +41,7 @@ export function MainMenu() {
 
   const hasSave = useGameStore((state) => state.hasSave);
   const startNewGame = useGameStore((state) => state.startNewGame);
+  const lastVisitedPath = useGameStore((state) => state.lastVisitedPath);
 
   const [showNewGameConfirm, setShowNewGameConfirm] = useState(false);
   const [time, setTime] = useState("11:47 PM");
@@ -207,7 +208,7 @@ export function MainMenu() {
                 <MenuButton onClick={handleNewGame}>New</MenuButton>
 
                 {hasSave && (
-                  <MenuButton onClick={() => router.push("/game")}>
+                  <MenuButton onClick={() => router.push(lastVisitedPath || "/game")}>
                     Continue
                   </MenuButton>
                 )}
