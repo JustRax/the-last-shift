@@ -44,8 +44,6 @@ export function GameScene() {
       .filter((id) => state.flags[`investigated:${id}`]),
   );
 
-  const canUseComputer = canInvestigate("investigation", investigated, "computer");
-
   const currentLine = wakeUpDialogue[dialogueIndex];
 
   const sceneLabel = useMemo(() => {
@@ -98,6 +96,7 @@ export function GameScene() {
   function choosePhone(choice: ChoiceDefinition) {
     applyEffects(choice.effects);
     Object.entries(choice.flags).forEach(([key, value]) => setFlag(key, value));
+    useGameStore.getState().recordChoice(choice.id);
 
     setPhoneReady(false);
     setStage("chapter-end");
@@ -110,8 +109,8 @@ export function GameScene() {
   }
 
   function continueToChapterOne() {
-    setStage("chapter-end");
-    setScenario("chapter-01-end");
+    setStage("investigation");
+    setScenario("chapter-01-welcome-back");
   }
 
   if (!hasSave) {
