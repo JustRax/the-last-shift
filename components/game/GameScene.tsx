@@ -110,8 +110,8 @@ export function GameScene() {
     setScenario("chapter-01-end");
     setNotice(
       choice.id === "answer-phone"
-        ? "The line goes quiet. Someone whispers: “If they ask whether you remember, say no.”"
-        : "The ringing stops. The silence lasts longer than it should.",
+        ? "STATUS UPDATED // KNOWLEDGE +5 // DANGER +5. The line goes quiet. Someone whispers: “If they ask whether you remember, say no.”"
+        : "STATUS UPDATED // PHONE IGNORED. The ringing stops. The silence lasts longer than it should.",
     );
   }
 
