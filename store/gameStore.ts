@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import type { GameStage } from "@/types/game";
 
 export type Theme = "dark" | "light" | "system";
 
@@ -13,6 +14,8 @@ export interface GameStats {
 export interface GameState {
   currentScenarioId: string;
   currentChapter: number;
+  currentStage: GameStage;
+  dialogueIndex: number;
   stats: GameStats;
   flags: Record<string, boolean>;
   clues: string[];
@@ -29,6 +32,8 @@ export interface GameState {
   startNewGame: () => void;
   setTheme: (theme: Theme) => void;
   setScenario: (scenarioId: string) => void;
+  setStage: (stage: GameStage) => void;
+  setDialogueIndex: (index: number) => void;
   setChapter: (chapter: number) => void;
   markInvestigated: (id: string) => void;
   setFlag: (key: string, value: boolean) => void;
@@ -69,6 +74,8 @@ export const useGameStore = create<GameState>()(
         set((state) => ({
           currentScenarioId: "chapter-00-wake-up",
           currentChapter: 0,
+          currentStage: "wake-up",
+          dialogueIndex: 0,
           stats: { ...initialStats },
           flags: {},
           clues: [],
@@ -92,6 +99,18 @@ export const useGameStore = create<GameState>()(
       setScenario: (scenarioId) =>
         set({
           currentScenarioId: scenarioId,
+          hasSave: true,
+        }),
+
+      setStage: (stage) =>
+        set({
+          currentStage: stage,
+          hasSave: true,
+        }),
+
+      setDialogueIndex: (index) =>
+        set({
+          dialogueIndex: index,
           hasSave: true,
         }),
 
