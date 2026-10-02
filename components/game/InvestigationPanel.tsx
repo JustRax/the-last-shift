@@ -41,14 +41,14 @@ export function InvestigationPanel({
             <motion.button
               key={item.id}
               type="button"
-              disabled={disabled || done || locked}
+              disabled={disabled || locked}
               onClick={() => onInvestigate(item.id)}
               whileTap={disabled || done || locked ? undefined : { scale: 0.99 }}
               className={[
                 "border p-4 text-left transition-colors",
                 "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ui-border-strong)]",
                 done
-                  ? "border-[var(--ui-border)] bg-[var(--ui-surface)] opacity-55"
+                  ? "border-[var(--ui-border-strong)] bg-[var(--ui-surface)]"
                   : locked
                     ? "border-[var(--ui-border)] bg-[var(--ui-surface)] opacity-35"
                     : "border-[var(--ui-border-strong)] bg-[var(--ui-panel)] hover:bg-[var(--ui-panel-hover)]",
@@ -58,7 +58,7 @@ export function InvestigationPanel({
                 {item.label}
               </p>
               <p className="mt-2 font-mono text-[10px] leading-5 text-[var(--ui-text-subtle)]">
-                {done ? "INSPECTED." : locked ? "LOCKED." : item.description}
+                {locked ? "LOCKED." : done ? "VIEW AGAIN." : item.description}
               </p>
             </motion.button>
           );
