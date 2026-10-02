@@ -59,9 +59,8 @@ export function GameScene() {
   }
 
   function startInvestigation() {
-    setChapter(1);
     setStage("investigation");
-    setScenario("chapter-01-welcome-back");
+    setScenario("chapter-00-wake-up");
   }
 
   function advanceDialogue() {
@@ -111,6 +110,7 @@ export function GameScene() {
   }
 
   function continueToChapterOne() {
+    setChapter(1);
     setStage("investigation");
     setScenario("chapter-01-welcome-back");
   }
